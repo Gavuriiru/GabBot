@@ -7,6 +7,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Gabriel4._0.Ignore;
+using System;
+using Microsoft.VisualBasic;
 
 namespace Gabriel4._0.Comandos
 {
@@ -14,6 +17,23 @@ namespace Gabriel4._0.Comandos
     {
         const string LolisLife = "https://api.lolis.life/random";
         const string NekosLife = "https://nekos.life/api/v2/img/";
+        const string Dbooru = "https://danbooru.donmai.us/posts.json?login=";
+
+        [Command("Foda-se")]
+        [Aliases("Fodase", "fds")]
+        [Description("Foda-se")]
+
+        public async Task FodeuMesmo (CommandContext ctx)
+        {
+
+            await ctx.RespondAsync(embed: new DiscordEmbedBuilder
+            {
+                Title = "Foda-se?",
+                ImageUrl = Fodase.Links[new Random().Next(0, Fodase.Links.Length)],
+                Color = DiscordColor.Purple
+            });
+        }
+
 
         [Command("Loli")]
         [Aliases("L")]
@@ -81,7 +101,7 @@ namespace Gabriel4._0.Comandos
             using (var yay = new StreamReader(inhau, new UTF8Encoding(false)))
                 json = await yay.ReadToEndAsync();
 
-            var auau = JsonConvert.DeserializeObject<yayyy>(json);
+            var auau = JsonConvert.DeserializeObject<Yayyy>(json);
 
             if (ctx.Channel.IsNSFW)
             {
@@ -101,7 +121,7 @@ namespace Gabriel4._0.Comandos
                 else
                 {
                     WebClient webClient = new WebClient();
-                    JArray yay = JArray.Parse(await webClient.DownloadStringTaskAsync($"https://yande.re/post.json?login={auau.YouWatanabe}&limit=1&tags=order%3Arandom+rating%3Aexplicit+" + hoshii));
+                    JArray yay = JArray.Parse(await webClient.DownloadStringTaskAsync($"https://yande.re/post.json?login={auau.YouWatanabe}&limit=1&tags=order%3Arandom+rating%3Aexplicit+" + hoshii.Replace(' ', '_')));
                     await ctx.TriggerTypingAsync();
                     await ctx.RespondAsync(embed: new DiscordEmbedBuilder
                     {
@@ -130,7 +150,7 @@ namespace Gabriel4._0.Comandos
                 else
                 {
                     WebClient webClient = new WebClient();
-                    JArray yay = JArray.Parse(await webClient.DownloadStringTaskAsync($"https://yande.re/post.json?login={auau.YouWatanabe}&limit=1&tags=order%3Arandom+rating%3Asafe+" + hoshii));
+                    JArray yay = JArray.Parse(await webClient.DownloadStringTaskAsync($"https://yande.re/post.json?login={auau.YouWatanabe}&limit=1&tags=order%3Arandom+rating%3Asafe+" + hoshii.Replace(' ', '_')));
                     await ctx.TriggerTypingAsync();
                     await ctx.RespondAsync(embed: new DiscordEmbedBuilder
                     {
@@ -144,7 +164,6 @@ namespace Gabriel4._0.Comandos
             }
         }
 
-        string Dbooru = "https://danbooru.donmai.us/posts.json?login=";
         [Command("Danbooru")]
         [Aliases("dbr")]
         [Description("Te manda uma imagem aleatória, ou com a tag especificada.")]
@@ -156,7 +175,7 @@ namespace Gabriel4._0.Comandos
             using (var yay = new StreamReader(inhau, new UTF8Encoding(false)))
                 json = await yay.ReadToEndAsync();
 
-            var auau = JsonConvert.DeserializeObject<yayyy>(json);
+            var auau = JsonConvert.DeserializeObject<Yayyy>(json);
 
             if (ctx.Channel.IsNSFW)
             {
@@ -218,7 +237,7 @@ namespace Gabriel4._0.Comandos
 
             }
         }
-        public struct yayyy
+        public struct Yayyy
         {
             [JsonProperty("yandere")]
             public string YouWatanabe { get; private set; }

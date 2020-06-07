@@ -13,8 +13,8 @@ namespace Gabriel4._0.Comandos
     public class NSFW : BaseCommandModule
     {
 
-        string NekosLife = "https://nekos.life/api/v2/img/";
-        string LolisLife = "https://api.lolis.life/random?category=";
+        readonly string NekosLife = "https://nekos.life/api/v2/img/";
+        readonly string LolisLife = "https://api.lolis.life/random?category=";
 
         [Command("Hentai")]
         [Aliases("H", "Ero")]

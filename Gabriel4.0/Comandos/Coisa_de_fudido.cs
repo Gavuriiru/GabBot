@@ -10,7 +10,7 @@ namespace Gabriel4._0.Comandos
     class Coisa_de_fudido : BaseCommandModule
     {
 
-        string NekosLife = "https://nekos.life/api/v2/img/";
+        const string NekosLife = "https://nekos.life/api/v2/img/";
 
         [Command("AvatarAnime")]
         [Aliases("AvAn", "UA")]
